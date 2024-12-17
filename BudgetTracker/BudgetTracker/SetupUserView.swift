@@ -60,10 +60,9 @@ struct SetupUserView: View {
 
     private func saveUser() {
         guard !tempFirstName.isEmpty, !tempLastName.isEmpty, let balance = Float(tempBalance) else {
-            return // Evita di salvare dati incompleti o errati
+            return
         }
         
-        // Inserisci e salva manualmente nel contesto
         let newUser = User(name: tempFirstName, surname: tempLastName, balance: balance)
         context.insert(newUser)
         

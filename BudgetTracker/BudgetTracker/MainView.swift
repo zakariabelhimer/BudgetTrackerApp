@@ -12,28 +12,28 @@ struct MainView: View {
     @AppStorage("userFirstName") private var firstName: String = ""
     @AppStorage("userLastName") private var lastName: String = ""
 
-    @State private var reloadKey = UUID() 
     @State private var showSetupView: Bool = false
+    @State private var reloadKey = UUID()
 
     var body: some View {
         Group {
-            
-            UserView()
-                .id(reloadKey)
+            if firstName.isEmpty || lastName.isEmpty {
+                SetupUserView {
+                    reloadKey = UUID()
+                    showSetupView = false
+                }
+            } else {
+                UserView()
+                    .id(reloadKey) 
+            }
         }
         .onAppear {
-           
             showSetupView = firstName.isEmpty || lastName.isEmpty
-        }
-        .fullScreenCover(isPresented: $showSetupView) {
-            SetupUserView {
-                
-                reloadKey = UUID()
-                showSetupView = false
-            }
         }
     }
 }
+
+
 
 struct UserView: View {
     @AppStorage("userFirstName") private var firstName: String = ""
