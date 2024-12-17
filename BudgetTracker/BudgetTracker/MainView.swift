@@ -12,22 +12,22 @@ struct MainView: View {
     @AppStorage("userFirstName") private var firstName: String = ""
     @AppStorage("userLastName") private var lastName: String = ""
 
-    @State private var reloadKey = UUID() // Forza un aggiornamento della vista
+    @State private var reloadKey = UUID() 
     @State private var showSetupView: Bool = false
 
     var body: some View {
         Group {
-            // Forza il refresh usando reloadKey
+            
             UserView()
                 .id(reloadKey)
         }
         .onAppear {
-            // Mostra SetupUserView se i dati sono mancanti
+           
             showSetupView = firstName.isEmpty || lastName.isEmpty
         }
         .fullScreenCover(isPresented: $showSetupView) {
             SetupUserView {
-                // Chiudi e forza il reload
+                
                 reloadKey = UUID()
                 showSetupView = false
             }

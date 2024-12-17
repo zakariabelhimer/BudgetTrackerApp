@@ -12,9 +12,8 @@ import SwiftUI
 import Charts
 
 struct DonutChartView: View {
-    var data: [String: Float] // Dati con categorie come stringhe e i valori delle spese
-
-    // Mappa dei colori per le categorie
+    var data: [String: Float]
+    
     private let categoryColors: [String: Color] = [
         "FoodAndDrinks": .red,
         "Shopping": .pink,
@@ -27,14 +26,14 @@ struct DonutChartView: View {
         "Other": .gray
     ]
 
-    // Genera i dati con segmenti vuoti per simulare lo spazio tra categorie
+ 
     private var chartData: [(category: String, value: Float)] {
         var result: [(String, Float)] = []
-        let spacerValue: Float = 0.005 // Valore molto piccolo per creare spazio
+        let spacerValue: Float = 0.005
 
         for (key, value) in data {
             result.append((key, value))
-            result.append(("Spacer", spacerValue)) // Aggiunge un segmento vuoto
+            result.append(("Spacer", spacerValue))
         }
 
         return result
@@ -44,7 +43,7 @@ struct DonutChartView: View {
         Chart {
             ForEach(chartData, id: \.category) { item in
                 if item.category == "Spacer" {
-                    // Segmento trasparente per simulare lo spazio
+                   
                     SectorMark(
                         angle: .value("Amount", item.value),
                         innerRadius: .ratio(0.85),
@@ -52,19 +51,17 @@ struct DonutChartView: View {
                     )
                     .foregroundStyle(.clear)
                 } else {
-                    // Segmenti principali con angoli arrotondati e colore personalizzato
                     SectorMark(
                         angle: .value("Amount", item.value),
                         innerRadius: .ratio(0.85),
                         outerRadius: .ratio(1.0)
                     )
                     .cornerRadius(10)
-                    .foregroundStyle(categoryColors[item.category, default: .gray]) // Colore della categoria
-                }
+                    .foregroundStyle(categoryColors[item.category, default: .gray])                 }
             }
         }
         .frame(width: 300, height: 300)
-        .chartLegend(.hidden) // Nasconde la legenda
+        .chartLegend(.hidden) 
     }
 }
 

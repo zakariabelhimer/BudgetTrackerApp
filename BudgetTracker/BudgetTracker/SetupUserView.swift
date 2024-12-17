@@ -74,11 +74,10 @@ struct SetupUserView: View {
             print("Error saving user: \(error)")
         }
 
-        // Aggiorna AppStorage
+      
         firstName = tempFirstName
         lastName = tempLastName
         
-        // Chiama la closure per chiudere la schermata
-        onSave()
+                onSave()
     }
 }

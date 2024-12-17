@@ -11,7 +11,7 @@ import Charts
 struct InsightsView: View {
     @Bindable var user: User
 
-    // Raggruppa le spese per categoria
+    
     private var expensesByCategory: [String: Float] {
         let calendar = Calendar.current
         let currentMonth = calendar.component(.month, from: Date())
@@ -27,7 +27,7 @@ struct InsightsView: View {
             .mapValues { $0.reduce(0) { $0 + $1.amount } }
     }
 
-    // Totale delle spese di questo mese
+    
     private var totalSpentThisMonth: Float {
         expensesByCategory.values.reduce(0, +)
     }
@@ -35,13 +35,13 @@ struct InsightsView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                // Titolo della pagina
+                
                 Text("Expenses")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding(.top, 20)
 
-                // Grafico Donut con il totale al centro
+                
                 ZStack {
                     DonutChartView(data: expensesByCategory)
                         .frame(width: 300, height: 300)
@@ -51,7 +51,7 @@ struct InsightsView: View {
                         .fontWeight(.bold)
                 }
 
-                // Griglia delle card delle categorie
+                
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
                     ForEach(expensesByCategory.sorted(by: { $0.value > $1.value }), id: \.key) { category, value in
                         CategoryCardView(
@@ -68,10 +68,10 @@ struct InsightsView: View {
             }
         }
         .padding(.bottom, 20)
-        .background(Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)) // Supporto Dark Mode
+        .background(Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all))
     }
 
-    // Funzione per mappare i colori
+    
     private func colorForCategory(category: ExpenseCategory) -> Color {
         switch category {
         case .FoodAndDrinks:

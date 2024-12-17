@@ -54,9 +54,9 @@ struct SpentCardView: View {
             }
         }
         .padding()
-        .background(Color(UIColor.secondarySystemBackground)) // Adattabile alla Dark Mode
+        .background(Color(UIColor.secondarySystemBackground)) 
         .cornerRadius(12)
-        .shadow(radius: 5, x: 2, y: 2) // Ombra dinamica
+        .shadow(radius: 5, x: 2, y: 2)
         .padding(.horizontal, 20)
     }
 }

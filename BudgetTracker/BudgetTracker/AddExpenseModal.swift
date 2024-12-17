@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct AddExpenseModal: View {
-    @Bindable var user: User // Utente corrente
+    @Bindable var user: User
 
     @State private var expenseName: String = ""
     @State private var expenseAmount: String = ""
@@ -23,12 +23,12 @@ struct AddExpenseModal: View {
                 
                 TextField("Expense Name", text: $expenseName)
                     .padding()
-                    .background(Color(UIColor.systemGray6)) // Sfondo grigio chiaro
-                    .cornerRadius(12) // Bordi arrotondati
+                    .background(Color(UIColor.systemGray6))
+                    .cornerRadius(12)
                     .font(.system(size: 16))
-                    .frame(height: 50) // Altezza del TextField
-                    .frame(maxWidth: .infinity) // Larghezza massima
-                    .padding(.horizontal, 20) // Margine orizzontale esterno
+                    .frame(height: 50)
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 20)
 
                 TextField("Expense Amount", text: $expenseAmount)
                     .keyboardType(.decimalPad)
@@ -36,12 +36,12 @@ struct AddExpenseModal: View {
                     .background(Color(UIColor.systemGray6))
                     .cornerRadius(12)
                     .font(.system(size: 16))
-                    .frame(height: 50) // Altezza del TextField
-                    .frame(maxWidth: .infinity) // Larghezza massima
+                    .frame(height: 50)
+                    .frame(maxWidth: .infinity)
                     .padding(.horizontal, 20)
 
                 
-                // Categoria selezionabile con bottoni estetici
+               
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Category")
                         .font(.headline)
@@ -58,7 +58,7 @@ struct AddExpenseModal: View {
                     }
                 }
 
-                // Bottone Add Expense con gradiente rosso
+               
                 Button(action: addExpense) {
                     Text("Add Expense")
                         .font(.headline)
@@ -84,7 +84,7 @@ struct AddExpenseModal: View {
         }
     }
 
-    // Funzione per creare il bottone della categoria
+  
     private func categoryButton(for category: ExpenseCategory) -> some View {
         let isSelected = selectedCategory == category
 
@@ -98,14 +98,14 @@ struct AddExpenseModal: View {
                 .padding(.vertical, 8)
                 .background(
                     isSelected
-                        ? gradientRed() // Stato selezionato
-                        : gradientGray() // Stato non selezionato
+                        ? gradientRed()
+                        : gradientGray()
                 )
                 .cornerRadius(15)
         }
     }
 
-    // Gradiente rosso
+    
     private func gradientRed() -> LinearGradient {
         LinearGradient(
             gradient: Gradient(colors: [.red, .pink]),
@@ -114,7 +114,6 @@ struct AddExpenseModal: View {
         )
     }
 
-    // Gradiente grigio
     private func gradientGray() -> LinearGradient {
         LinearGradient(
             gradient: Gradient(colors: [Color.gray.opacity(0.5), Color.gray.opacity(0.3)]),
@@ -123,7 +122,7 @@ struct AddExpenseModal: View {
         )
     }
 
-    // Funzione per mostrare nomi leggibili delle categorie
+    
     private func categoryDisplayName(for category: ExpenseCategory) -> String {
         switch category {
         case .FoodAndDrinks: return "Food & Drinks"
@@ -141,7 +140,7 @@ struct AddExpenseModal: View {
     private func addExpense() {
         guard let amount = Float(expenseAmount), amount > 0 else { return }
         
-        // Creazione della nuova spesa
+       
         let newExpense = Expense(
             amount: amount,
             name: expenseName,
@@ -149,7 +148,7 @@ struct AddExpenseModal: View {
             category: selectedCategory.rawValue
         )
         
-        // Aggiunta della spesa all'utente e aggiornamento del bilancio
+       
         user.expenses.append(newExpense)
         user.balance -= amount
         

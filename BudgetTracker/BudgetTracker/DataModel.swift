@@ -40,7 +40,7 @@ class User {
     var name: String
     var surname: String
     var balance: Float
-    @Relationship var expenses: [Expense] // Usa un array per compatibilità
+    @Relationship var expenses: [Expense] 
     
     init(name: String, surname: String, balance: Float = 0) {
         self.name = name

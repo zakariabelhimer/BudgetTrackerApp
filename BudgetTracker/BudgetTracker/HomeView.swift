@@ -33,7 +33,7 @@ struct HomeView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Titolo con Saluto e Nome Utente
+            
             HStack {
                 Text("Hello, \(user.name)!")
                     .font(.largeTitle)
@@ -45,8 +45,8 @@ struct HomeView: View {
             .padding(.top, 20)
 
             ScrollView {
-                VStack(spacing: 30) { // Spaziatura aumentata tra le sezioni
-                    // Timeline: Giorno corrente del mese
+                VStack(spacing: 30) {
+                    
                     VStack(alignment: .leading, spacing: 10) {
                         HStack {
                             Text("Monthly Timeline")
@@ -83,25 +83,25 @@ struct HomeView: View {
                         .padding(.horizontal, 20)
                     }
 
-                    // Carta Wallet
+                    
                     WalletCardView(balance: .constant(user.balance), name: .constant(user.name))
-                        .shadow(radius: 5, x: 2, y: 2) // Rimosso il color
+                        .shadow(radius: 5, x: 2, y: 2)
                         .padding(.horizontal, 20)
 
-                    // Spent Card
+                    
                     SpentCardView(user: user)
-                        .shadow(radius: 5, x: 2, y: 2) // Rimosso il color
+                        .shadow(radius: 5, x: 2, y: 2)
 
-                    // Card delle ultime tre spese
+                    
                     RecentExpensesCard(expenses: user.expenses)
-                        .shadow(radius: 5, x: 2, y: 2) // Rimosso il color
+                        .shadow(radius: 5, x: 2, y: 2)
 
                     Spacer()
                 }
                 .padding(.vertical, 10)
             }
 
-            // Bottoni fissi in basso con gradienti
+            
             VStack(spacing: 10) {
                 HStack(spacing: 20) {
                     Button(action: {
@@ -116,8 +116,8 @@ struct HomeView: View {
                                                startPoint: .leading, endPoint: .trailing)
                             )
                             .cornerRadius(12)
-                            .shadow(radius: 5, x: 2, y: 2) // Rimosso il color
-                    }
+                            .shadow(radius: 5, x: 2, y: 2)
+                    }.accessibilityLabel("cosi")
 
                     Button(action: {
                         showAddBalanceModal = true
@@ -131,23 +131,23 @@ struct HomeView: View {
                                                startPoint: .leading, endPoint: .trailing)
                             )
                             .cornerRadius(12)
-                            .shadow(radius: 5, x: 2, y: 2) // Rimosso il color
-                    }
+                            .shadow(radius: 5, x: 2, y: 2)
+                    }.accessibilityLabel("Add Balance")
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 20)
             }
-            .background(Color(UIColor.systemBackground).edgesIgnoringSafeArea(.bottom)) // Sfondo dinamico
+            .background(Color(UIColor.systemBackground).edgesIgnoringSafeArea(.bottom))
         }
-        .background(Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)) // Sfondo principale dinamico
+        .background(Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all))
         .sheet(isPresented: $showAddExpenseModal) {
             AddExpenseModal(user: user)
-                .presentationDetents([.medium]) // Altezza a metà schermo
-                .presentationDragIndicator(.visible) // Aggiunge il drag indicator
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
         }
         .sheet(isPresented: $showAddBalanceModal) {
             AddBalanceModal(user: user)
-                .presentationDetents([.medium]) // Altezza a metà schermo
+                .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
         }
     }
@@ -162,8 +162,8 @@ struct RecentExpensesCard: View {
     // Filtra le ultime tre spese
     private var recentExpenses: [Expense] {
         Array(expenses
-            .sorted(by: { $0.date > $1.date }) // Ordina per data decrescente
-            .prefix(3)) // Prendi le prime tre e convertilo in Array
+            .sorted(by: { $0.date > $1.date })
+            .prefix(3))
     }
 
     var body: some View {
@@ -199,15 +199,12 @@ struct RecentExpensesCard: View {
             }
         }
         .padding(.vertical, 10)
-        .background(Color(UIColor.secondarySystemBackground)) // Adattabile alla Dark Mode
+        .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(12)
-        .shadow(radius: 5, x: 2, y: 2) // Ombra dinamica
+        .shadow(radius: 5, x: 2, y: 2)
         .padding(.horizontal, 20)
     }
 }
 
 
-/*
-#Preview {
-    HomeView()
-}*/
+

@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct AddBalanceModal: View {
-    @Bindable var user: User // Utente corrente
+    @Bindable var user: User
 
     @State private var amountToAdd: String = ""
     @Environment(\.dismiss) private var dismiss
@@ -17,18 +17,16 @@ struct AddBalanceModal: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                // TextField con bordi arrotondati e stile pulito
                 TextField("Amount to Add", text: $amountToAdd)
                     .keyboardType(.decimalPad)
                     .padding()
-                    .background(Color(UIColor.systemGray6)) // Sfondo grigio chiaro
-                    .cornerRadius(12) // Bordi arrotondati
+                    .background(Color(UIColor.systemGray6))
+                    .cornerRadius(12)
                     .font(.system(size: 16))
-                    .frame(height: 50) // Altezza del TextField
-                    .frame(maxWidth: .infinity) // Larghezza massima
-                    .padding(.horizontal, 20) // Margine orizzontale esterno
+                    .frame(height: 50)
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 20)
 
-                // Bottone Add Balance con gradiente verde
                 Button(action: addBalance) {
                     Text("Add Balance")
                         .font(.headline)
@@ -54,7 +52,6 @@ struct AddBalanceModal: View {
         }
     }
 
-    // Gradiente verde per il bottone
     private func gradientGreen() -> LinearGradient {
         LinearGradient(
             gradient: Gradient(colors: [Color.green, Color.green.opacity(0.7)]),
@@ -65,9 +62,7 @@ struct AddBalanceModal: View {
 
     private func addBalance() {
         guard let amount = Float(amountToAdd), amount > 0 else { return }
-        
-        // Aggiunta al bilancio dell'utente
-        user.balance += amount
+                user.balance += amount
         
         dismiss()
     }
