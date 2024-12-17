@@ -117,7 +117,7 @@ struct HomeView: View {
                             )
                             .cornerRadius(12)
                             .shadow(radius: 5, x: 2, y: 2)
-                    }.accessibilityLabel("cosi")
+                    }.accessibilityLabel("Expenses Added")
 
                     Button(action: {
                         showAddBalanceModal = true
@@ -205,6 +205,8 @@ struct RecentExpensesCard: View {
         .padding(.horizontal, 20)
     }
 }
+
+
 
 
 
